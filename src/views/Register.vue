@@ -6,10 +6,10 @@
       </v-card-title>
       <v-form>
         <v-text-field
-          prepend-icon="mdi-account-circle"
-          label="ユーザ名"
-          v-model="name"
+          prepend-icon="mdi-email"
+          label="メールアドレス"
           required
+          v-model="email"
         ></v-text-field>
         <!-- prepend-iconで頭にappend-iconでお尻にアイコンを追加することができる -->
         <v-text-field
@@ -29,7 +29,7 @@
             sbMessage="ユーザー名は変更できません。よろしいですか？"
             agree="新規登録"
           />
-          <v-btn class="info" @click="submit">新規登録</v-btn>
+          <v-btn class="info" @click="register()">新規登録</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import firebase from "firebase/app";
+import axios from "../axios-for-auth.js"; //axiosのインスタンスをインポート
 import Dialog from "../components/dialog.vue";
 export default {
   name: "App",
@@ -46,30 +46,24 @@ export default {
   },
   data() {
     return {
-      name: "",
-      password: "",
       showPassword: false,
-      db: null,
-      usersRef: null,
-      users: {},
+      email: "",
+      password: "",
     };
   },
-  created() {
-    this.db = firebase.firestore();
-    //引数で指定しているコレクション名でコンソール内にコレクションが作成される
-    this.usersRef = this.db.collection("users");
-  },
   methods: {
-    submit() {
-      if (this.name === "" || this.password === "") {
-        return;
-      }
-      this.usersRef.add({
-        name: this.name,
-        password: this.password,
-        token: true,
-      });
-      this.name = "";
+    register() {
+      //axiosでapiを叩くメソッドを定義
+      axios
+        .post("/accounts:signUp?key=", {
+          email: this.email,
+          password: this.password,
+          returnSecureToken: true,
+        })
+        .then((response) => {
+          console.log(response); //返ってきたレスポンスをログに表示
+        });
+      this.email = "";
       this.password = "";
     },
   },
