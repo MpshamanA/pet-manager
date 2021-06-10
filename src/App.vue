@@ -1,16 +1,16 @@
 <template>
   <v-app>
-    <router-link to="/"> ログイン</router-link>
-    <router-link to="/register"> 新規登録</router-link>
-    <router-link to="/about"> 詳細ページ</router-link>
-
-    <router-view />
+    <Home />
   </v-app>
 </template>
 
 <script>
+import Home from "./views/Home.vue";
 export default {
   name: "App",
+  components: {
+    Home,
+  },
   data() {
     return {};
   },
@@ -19,7 +19,5 @@ export default {
 
 <style>
 a.router-link-exact-active {
-  color: red;
-  font-size: 25px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-card width="400px" class="mx-auto mt-5 pa-20 tp-100">
+    <v-card width="400px" class="mx-auto">
       <v-card-title>
-        <h1 class="display-1">新規登録</h1>
+        <h1 class="text-h6">新規登録</h1>
       </v-card-title>
       <v-form>
         <v-text-field
@@ -23,12 +23,12 @@
         >
         </v-text-field>
         <v-card-actions>
-          <Dialog
+          <!-- <Dialog
             btnName="新規登録"
             mainMessage="新規登録します"
-            sbMessage="ユーザー名は変更できません。よろしいですか？"
+            sbMessage="よろしいですか？"
             agree="新規登録"
-          />
+          /> -->
           <v-btn class="info" @click="register()">新規登録</v-btn>
         </v-card-actions>
       </v-form>
@@ -38,11 +38,11 @@
 
 <script>
 import axios from "../axios-for-auth.js"; //axiosのインスタンスをインポート
-import Dialog from "../components/dialog.vue";
+//import Dialog from "../components/dialog.vue";
 export default {
   name: "App",
   components: {
-    Dialog,
+    //Dialog,
   },
   data() {
     return {
@@ -61,7 +61,10 @@ export default {
           returnSecureToken: true,
         })
         .then((response) => {
-          console.log(response); //返ってきたレスポンスをログに表示
+          //受け取ったレスポンスのidTokenをVuexのupdateIdTokenに渡している
+          this.$store.commit("updateIdToken", response.data.idToken);
+          //新規登録が正常に終了したら詳細画面に遷移
+          this.$router.push("/about");
         });
       this.email = "";
       this.password = "";

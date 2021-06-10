@@ -1,5 +1,13 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <div class="about"><!--  <Sidebar /> --></div>
 </template>
+
+<script>
+//import Sidebar from "../components/sidebar.vue";
+export default {
+  name: "App",
+  components: {
+    // Sidebar,
+  },
+};
+</script>

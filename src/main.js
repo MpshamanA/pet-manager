@@ -11,7 +11,7 @@ Vue.config.productionTip = false;
 
 //firebaseからコピー
 /*************************************************/
-var firebaseConfig = {};
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 /*************************************************/
