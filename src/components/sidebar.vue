@@ -22,9 +22,8 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title
-              ><router-link to="/"> ログイン</router-link></v-list-item-title
-            >
+            <v-list-item-title>
+              foo1
           </v-list-item-content>
         </v-list-item>
         <v-list-item link>
@@ -34,9 +33,8 @@
 
           <v-list-item-content>
             <v-list-item-title>
-              <router-link to="/register">
-                新規登録</router-link
-              ></v-list-item-title
+              foo2
+              </v-list-item-title
             >
           </v-list-item-content>
         </v-list-item>
@@ -47,9 +45,7 @@
 
           <v-list-item-content>
             <v-list-item-title
-              ><router-link to="/about">
-                詳細ページ</router-link
-              ></v-list-item-title
+              >foo3</v-list-item-title
             >
           </v-list-item-content>
         </v-list-item>

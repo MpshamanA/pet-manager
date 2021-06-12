@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-card width="400px" class="mx-auto">
+  <v-app class="tp-100">
+    <v-card width="400px">
       <v-card-title>
         <h1 class="text-h5">ログイン</h1>
       </v-card-title>
@@ -9,6 +9,7 @@
           prepend-icon="mdi-email"
           label="メールアドレス"
           v-model="email"
+          :rules="emailRules"
           required
         ></v-text-field>
         <!-- prepend-iconで頭にappend-iconでお尻にアイコンを追加することができる -->
@@ -39,6 +40,9 @@ export default {
       email: "",
       password: "",
       showPassword: false,
+      emailRules: [
+        (v) => /.+@.+/.test(v) || "メールアドレスを記載してください",
+      ],
     };
   },
   methods: {
@@ -50,12 +54,18 @@ export default {
           returnSecureToken: true,
         })
         .then((response) => {
-          //console.log(response.data);
-          this.$store.commit("updateToken", response.data.idToken);
-          this.$router.push("/about");
+          console.log(response.status);
+          if (response.status === 200) {
+            this.$store.commit("updateIdToken", response.data.idToken);
+            this.$router.push("/about");
+          } else {
+            return;
+          }
         });
-      this.email = "";
-      this.password = "";
+      setTimeout(() => {
+        this.email = "";
+        this.password = "";
+      }, 1500);
     },
   },
   computed: {},
@@ -63,7 +73,7 @@ export default {
 </script>
 
 <style scoped>
-.tp-100 {
-  top: 100px;
+.errorMse {
+  color: red;
 }
 </style>

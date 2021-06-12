@@ -1,5 +1,5 @@
 <template>
-  <v-card height="800" width="256" top="0">
+  <v-card class="top-62" height="100vh" width="256" dark>
     <v-navigation-drawer permanent>
       <v-list-item>
         <v-list-item-content>
@@ -22,7 +22,7 @@
 
           <v-list-item-content>
             <v-list-item-title>
-              <router-link to="/register"> 新規登録</router-link>
+              foo1
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -33,7 +33,7 @@
 
           <v-list-item-content>
             <v-list-item-title>
-              <router-link to="/login">ログイン</router-link>
+              <router-link to="/about">詳細</router-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -49,3 +49,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.top-62 {
+  top: 62px;
+  position: fixed;
+}
+</style>
