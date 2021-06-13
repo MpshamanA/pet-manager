@@ -54,9 +54,9 @@ export default {
           returnSecureToken: true,
         })
         .then((response) => {
-          console.log(response.status);
           if (response.status === 200) {
             this.$store.commit("updateIdToken", response.data.idToken);
+            this.$store.commit("updateEmail", response.data.email);
             this.$router.push("/about");
           } else {
             return;

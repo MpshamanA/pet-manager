@@ -7,6 +7,18 @@
         </v-card-title>
         <v-form>
           <v-text-field
+            prepend-icon="mdi-account"
+            label="ニックネーム"
+            required
+            v-model="userName"
+          ></v-text-field>
+          <v-text-field
+            prepend-icon="mdi-dog-side"
+            label="ペットの名前"
+            required
+            v-model="petName"
+          ></v-text-field>
+          <v-text-field
             prepend-icon="mdi-email"
             label="メールアドレス"
             required
@@ -38,7 +50,7 @@
 
 <script>
 import axios from "../axios-for-auth.js"; //axiosのインスタンスをインポート
-//import Dialog from "../components/dialog.vue";
+import firebase from "firebase/app";
 export default {
   name: "App",
   components: {
@@ -54,7 +66,16 @@ export default {
         min: (v) => v.length >= 6 || "Min 6 characters",
       },
       emailRules: [(v) => /.+@.+/.test(v) || "メールアドレスを記載ください"],
+      db: null,
+      userRef: "",
+      userName: "",
+      petName: "",
     };
+  },
+  created() {
+    //firebaseのfirestoredatabaseのusersというコレクションを指定（なければ作成される）
+    this.db = firebase.firestore();
+    this.userRef = this.db.collection("users");
   },
   methods: {
     register() {
@@ -68,6 +89,7 @@ export default {
         .then((response) => {
           //受け取ったレスポンスのidTokenをVuexのupdateIdTokenに渡している
           this.$store.commit("updateIdToken", response.data.idToken);
+          this.$store.commit("updateEmail", response.data.email);
           //新規登録が正常に終了したら詳細画面に遷移
           this.$router.push("/about");
         });
@@ -75,6 +97,14 @@ export default {
         this.email = "";
         this.password = "";
       }, 1500);
+      if (this.email === "") {
+        return;
+      }
+      this.userRef.add({
+        userName: this.userName,
+        email: this.email,
+        petName: this.petName,
+      });
     },
   },
   computed: {},

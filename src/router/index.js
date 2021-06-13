@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import storeKey from "../store/index.js";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,15 @@ const routes = [
     name: "About",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    beforeEnter(to, from, next) {
+      if (storeKey.getters.idToken) {
+        //idTokenがあれば、そのまま"/about"に
+        next();
+      } else {
+        //なければ"/login"に飛ばす
+        next("/login");
+      }
+    },
   },
   {
     path: "/register",
