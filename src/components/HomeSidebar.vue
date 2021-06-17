@@ -21,7 +21,7 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>
-              foo1
+              <router-link to="/petNameInsert">ペット登録</router-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -32,7 +32,7 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>
-              <router-link to="/about">詳細</router-link>
+              <router-link to="/about">登録されたペット達</router-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

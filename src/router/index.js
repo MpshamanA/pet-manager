@@ -38,6 +38,21 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Register.vue"),
   },
+  {
+    path: "/petNameInsert",
+    name: "PetNameInsert",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/PetNameInsert.vue"),
+    beforeEnter(to, from, next) {
+      if (storeKey.getters.idToken) {
+        //idTokenがあれば、そのまま"/about"に
+        next();
+      } else {
+        //なければ"/login"に飛ばす
+        next("/login");
+      }
+    },
+  },
 ];
 
 const router = new VueRouter({

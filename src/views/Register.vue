@@ -1,22 +1,16 @@
 <template>
   <v-app>
     <main class="main">
-      <v-card width="400px">
+      <v-card class="pa-3" width="400px">
         <v-card-title>
           <h1 class="text-h6">新規登録</h1>
         </v-card-title>
         <v-form>
           <v-text-field
             prepend-icon="mdi-account"
-            label="ニックネーム"
+            label="飼い主の名前"
             required
             v-model="userName"
-          ></v-text-field>
-          <v-text-field
-            prepend-icon="mdi-dog-side"
-            label="ペットの名前"
-            required
-            v-model="petName"
           ></v-text-field>
           <v-text-field
             prepend-icon="mdi-email"
@@ -69,7 +63,6 @@ export default {
       db: null,
       userRef: "",
       userName: "",
-      petName: "",
     };
   },
   created() {
@@ -103,7 +96,6 @@ export default {
       this.userRef.add({
         userName: this.userName,
         email: this.email,
-        petName: this.petName,
       });
     },
   },

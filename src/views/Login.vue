@@ -1,6 +1,6 @@
 <template>
   <v-app class="tp-100">
-    <v-card width="400px">
+    <v-card class="pa-3" width="400px">
       <v-card-title>
         <h1 class="text-h5">ログイン</h1>
       </v-card-title>
